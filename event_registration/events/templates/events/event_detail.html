@@ -1,0 +1,11 @@
+{% extends 'base.html'%}
+{% block content%}
+
+<h2>{{ event.title }}</h2>
+<p><strong>Date:</strong> {{ event.date }}</p>
+<p><strong>Location:</strong> {{ event.location }}</p>
+<p><strong>Description:</strong> {{ event.description }}</p>
+
+<a href="{% url 'register_event' event.pk %}">Register for this event</a><br>
+<a href="{% url 'event_list' %}">← Back to Events List</a>
+{% endblock %}
