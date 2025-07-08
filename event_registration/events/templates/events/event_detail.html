@@ -1,11 +1,24 @@
 {% extends 'base.html'%}
+{% load static %}
 {% block content%}
 
-<h2>{{ event.title }}</h2>
-<p><strong>Date:</strong> {{ event.date }}</p>
-<p><strong>Location:</strong> {{ event.location }}</p>
-<p><strong>Description:</strong> {{ event.description }}</p>
+<link rel="stylesheet" href="{% static 'events/event_detail.css' %}">
 
-<a href="{% url 'register_event' event.pk %}">Register for this event</a><br>
-<a href="{% url 'event_list' %}">← Back to Events List</a>
+<div class="event-container">
+  <div class="auth">
+    {% if user.is_authenticated %}
+      Welcome, {{ user.username }} | <a href="{% url 'logout' %}">Logout</a>
+    {% else %}
+      <a href="{% url 'login' %}">Login</a>
+    {% endif %}
+  </div>
+
+  <h2>{{ event.title }}</h2>
+  <p><strong>Date:</strong> {{ event.date }}</p>
+  <p><strong>Location:</strong> {{ event.location }}</p>
+  <p><strong>Description:</strong> {{ event.description }}</p>
+
+  <a href="{% url 'register_event' event.pk %}" class="button">Register for this event</a>
+  <a href="{% url 'event_list' %}" class="back-link">&larr; Back to Events List</a>
+</div>
 {% endblock %}

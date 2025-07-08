@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <div class="alert alert-info mt-4">
+        You have been successfully logged out.
+  </div>
+  <a href="{% url 'login' %}" class="btn btn-primary">Login again</a> |
+  <a href="{% url 'event_list' %}" class="btn btn-secondary">Back to Home</a>
+{% endblock %}

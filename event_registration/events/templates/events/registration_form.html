@@ -1,12 +1,17 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block content%}
-<h2>Register for {{ event.title }}</h2>
+<link rel="stylesheet" href="{% static 'events/event_detail.css' %}">
 
-<form method="post">
-  {% csrf_token %}
-  {{ form.as_p }}
-  <button type="submit">Submit</button>
-</form>
+<div class="event-container">
+  <h2>Register for {{ event.title }}</h2>
 
-<a href="{% url 'event_detail' event.pk %}">← Back to Event Details</a>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="button">Submit</button>
+  </form>
+
+  <a href="{% url 'event_detail' event.pk %}" class="back-link">&larr; Back to Event Details</a>
+</div>
 {% endblock%}

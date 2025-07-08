@@ -4,6 +4,9 @@ from .forms import RegistrationForm
 
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth import login
+from .forms import SignUpForm
+
 
 
 
@@ -34,3 +37,16 @@ def register_event(request, pk):
     else:
         form = RegistrationForm()
     return render(request, 'events/registration_form.html', {'form': form, 'event': event})
+
+def signup(request):
+    if request.method == "POST":
+        form = SignUpForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            login(request, user)  # Auto-login after sign-up
+            messages.success(request, "Account created successfully!")
+            return redirect('event_list')
+    else:
+        form = SignUpForm()
+    return render(request, 'registration/signup.html', {'form': form})
+
